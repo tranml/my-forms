@@ -6,7 +6,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>Hello!</Text>
-      <Link href="/checkout/personal">Personal</Link>
+      <Link href="/checkout">Checkout</Link>
       <StatusBar style="auto" />
 
       <Stack.Screen options={{ title: 'Home' }} />
