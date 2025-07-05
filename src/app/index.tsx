@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { Stack } from 'expo-router';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Hello!</Text>
       <StatusBar style="auto" />
+
+      <Stack.Screen options={{ title: 'Home' }} />
     </View>
   );
 }
