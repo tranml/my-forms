@@ -81,7 +81,7 @@ export default function PersonalDetailsFormScreen() {
             containerStyle={{ flex: 1 }}
           />
           <CustomTextInput
-            name="postalCode"
+            name="postcode"
             label="Postal Code"
             placeholder="12345"
             inputMode="numeric"
@@ -90,7 +90,7 @@ export default function PersonalDetailsFormScreen() {
         </View>
 
         <CustomTextInput
-          name="phoneNumber"
+          name="phone"
           label="Phone Number"
           placeholder="1234567890"
           inputMode="tel"
