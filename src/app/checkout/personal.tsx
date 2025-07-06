@@ -12,11 +12,11 @@ export default function PersonalDetailsFormScreen() {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <CustomTextInput
-        label="Full Name"
-        placeholder="John Doe"
-      />
+    <ScrollView
+      style={{ backgroundColor: "white" }}
+      contentContainerStyle={styles.container}
+    >
+      <CustomTextInput label="Full Name" placeholder="John Doe" />
 
       <CustomTextInput
         label="Address"
@@ -41,7 +41,6 @@ export default function PersonalDetailsFormScreen() {
         placeholder="1234567890"
         inputMode="tel"
       />
-
 
       <CustomTextInput
         label="Phone Number"
@@ -102,7 +101,7 @@ export default function PersonalDetailsFormScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    // backgroundColor: "white",
     padding: 20,
     gap: 6,
   },
