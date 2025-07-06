@@ -11,9 +11,18 @@ import {
   FormProvider,
 } from "react-hook-form";
 
-
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+const PersonalInfoSchema = z.object({
+  fullName: z
+    .string({ message: "Full name is required!" })
+    .min(1, { message: "Full name must be longer than 1" }),
+  address: z.string().min(1, { message: "Please provide your address!" }),
+  city: z.string().min(1, { message: "City is required!" }),
+  postcode: z.string().min(1, { message: "Postal code is required!" }),
+  phone: z.string().min(1, { message: "Phone is required!" }),
+});
 
 export default function PersonalDetailsFormScreen() {
   const onNext: SubmitHandler<any> = (data) => {
@@ -29,7 +38,9 @@ export default function PersonalDetailsFormScreen() {
   //   control,
   // } = useForm();
 
-  const form = useForm();
+  const form = useForm({
+    resolver: zodResolver(PersonalInfoSchema),
+  });
 
   console.log("errors", form.formState.errors);
 
