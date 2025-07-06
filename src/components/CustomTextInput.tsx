@@ -18,7 +18,10 @@ export default function CustomTextInput({
   containerStyle,
   ...textInputProps
 }: CustomTextInputProps) {
-  const error = { message: "This is an error" };
+  const error = {
+    message:
+      "This is an error lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem ipsum dolor sit amet lorem",
+  };
 
   return (
     <View style={containerStyle}>
@@ -31,7 +34,9 @@ export default function CustomTextInput({
           error ? styles.errorInput : null,
         ]}
       />
-      <Text style={styles.error}>{error?.message}</Text>
+      <Text style={styles.error} numberOfLines={1}>
+        {error?.message}
+      </Text>
     </View>
   );
 }
