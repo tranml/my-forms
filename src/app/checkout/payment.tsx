@@ -1,11 +1,34 @@
-import { View, Text, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
+import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
+import CustomTextInput from "../../components/CustomTextInput";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const PaymentInfoSchema = z.object({
+  cardNumber: z
+    .string()
+    .min(1, { message: "Card number is required!" })
+    .regex(/^\d{4} \d{4} \d{4} \d{4}$/, {
+      message: "Invalid card number format",
+    })
+    .max(16, { message: "Card number must be 16 digits" }),
+});
+
+type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
+
 export default function PaymentDetailsFormScreen() {
-  const onNext = () => {
+  const form = useForm({
+    resolver: zodResolver(PaymentInfoSchema),
+  });
+
+  const onNext: SubmitHandler<PaymentInfoFormData> = (data) => {
     //validate form
+
+    console.log(data)
 
     //navigate to next screen
     router.push("/checkout/confirm");
@@ -13,8 +36,19 @@ export default function PaymentDetailsFormScreen() {
 
   return (
     <KeyboardAwareScrollView>
-      <Text>Payment Details</Text>
-      <CustomButton title="Next" onPress={onNext} style={styles.button} />
+      <FormProvider {...form}>
+        <CustomTextInput
+          label="Card Number"
+          name="cardNumber"
+          inputMode="numeric"
+          placeholder="1234 5678 9012 3456"
+        />
+        <CustomButton
+          title="Next"
+          onPress={form.handleSubmit(onNext)}
+          style={styles.button}
+        />
+      </FormProvider>
     </KeyboardAwareScrollView>
   );
 }
