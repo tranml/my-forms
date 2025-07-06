@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
@@ -12,7 +12,7 @@ export default function PersonalDetailsFormScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <CustomTextInput
         label="Full Name"
         placeholder="John Doe"
@@ -42,8 +42,60 @@ export default function PersonalDetailsFormScreen() {
         inputMode="tel"
       />
 
+
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+      <CustomTextInput
+        label="Phone Number"
+        placeholder="1234567890"
+        inputMode="tel"
+      />
+
       <CustomButton title="Next" onPress={onNext} style={styles.button} />
-    </View>
+    </ScrollView>
   );
 }
 
