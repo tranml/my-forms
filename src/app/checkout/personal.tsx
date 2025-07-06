@@ -27,7 +27,7 @@ export default function PersonalDetailsFormScreen() {
       <Controller
         control={control}
         name="fullName"
-        rules={{ required: true }}
+        rules={{ required: "Full Name is required" }}
         render={({ field: { onChange, onBlur, value } }) => (
           <CustomTextInput
             label="Full Name"
