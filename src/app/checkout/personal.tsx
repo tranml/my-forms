@@ -4,13 +4,17 @@ import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
+import { useForm, SubmitHandler } from "react-hook-form";
+
 export default function PersonalDetailsFormScreen() {
   const onNext = () => {
-    //validate form
+    //validate form: when get to the point, data is already validated by react-hook-form
 
     //navigate to next screen
     router.push("/checkout/payment");
   };
+
+  const { handleSubmit } = useForm();
 
   return (
     <KeyboardAwareScrollView>
@@ -40,7 +44,11 @@ export default function PersonalDetailsFormScreen() {
         inputMode="tel"
       />
 
-      <CustomButton title="Next" onPress={onNext} style={styles.button} />
+      <CustomButton
+        title="Next"
+        onPress={handleSubmit(onNext)}
+        style={styles.button}
+      />
     </KeyboardAwareScrollView>
   );
 }
