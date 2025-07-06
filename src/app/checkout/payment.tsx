@@ -11,7 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const PaymentInfoSchema = z.object({
   cardNumber: z.string().min(1, { message: "Card number is required!" }),
   expiryDate: z.string().min(1, { message: "Expiry date is required!" }),
-  cvv: z.coerce.number(),
+  cvv: z.coerce.number().min(100, { message: "CVV must be 3 digits" }).max(999, { message: "CVV must be 3 digits" }),
 });
 
 type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
