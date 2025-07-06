@@ -24,10 +24,12 @@ const PersonalInfoSchema = z.object({
   phone: z.string().min(1, { message: "Phone is required!" }),
 });
 
+type PersonalInfoFormData = z.infer<typeof PersonalInfoSchema>;
+
 export default function PersonalDetailsFormScreen() {
-  const onNext: SubmitHandler<any> = (data) => {
+  const onNext: SubmitHandler<PersonalInfoFormData> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
-    console.log("data", data);
+    console.log("data", data.fullName);
     //navigate to next screen
     router.push("/checkout/payment");
   };
@@ -42,7 +44,7 @@ export default function PersonalDetailsFormScreen() {
     resolver: zodResolver(PersonalInfoSchema),
   });
 
-  console.log("errors", form.formState.errors);
+  // console.log("errors", form.formState.errors);
 
   return (
     <KeyboardAwareScrollView>
