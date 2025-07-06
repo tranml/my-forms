@@ -17,7 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 const PersonalInfoSchema = z.object({
   fullName: z
     .string({ message: "Full name is required!" })
-    .min(1, { message: "Full name must be longer than 1" }),
+    .min(1, { message: "Full name must be longer than 1" })
+    .trim(),
   address: z.string().min(1, { message: "Please provide your address!" }),
   city: z.string().min(1, { message: "City is required!" }),
   postcode: z.string().min(1, { message: "Postal code is required!" }),
@@ -40,7 +41,7 @@ export default function PersonalDetailsFormScreen() {
   //   control,
   // } = useForm();
 
-  const form = useForm({
+  const form = useForm<PersonalInfoFormData>({
     resolver: zodResolver(PersonalInfoSchema),
   });
 
