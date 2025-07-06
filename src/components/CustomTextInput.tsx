@@ -11,12 +11,17 @@ export default function CustomTextInput({
 }: CustomTextInputProps) {
   const error = { message: "This is an error" };
 
+  console.log(textInputProps);
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         {...textInputProps}
-        style={[styles.input, error ? styles.errorInput : null]}
+        style={[
+          styles.input,
+          textInputProps.style,
+          error ? styles.errorInput : null,
+        ]}
       />
       <Text style={styles.error}>{error?.message}</Text>
     </View>
