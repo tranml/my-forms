@@ -1,19 +1,27 @@
 import { ComponentProps } from "react";
-import { TextInput, StyleSheet, View, Text } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  View,
+  Text,
+  StyleProp,
+  ViewStyle,
+} from "react-native";
 
-type CustomTextInputProps = { label?: string } & ComponentProps<
-  typeof TextInput
->;
+type CustomTextInputProps = {
+  label?: string;
+  containerStyle?: StyleProp<ViewStyle>;
+} & ComponentProps<typeof TextInput>;
 
 export default function CustomTextInput({
   label,
+  containerStyle,
   ...textInputProps
 }: CustomTextInputProps) {
   const error = { message: "This is an error" };
 
-  console.log(textInputProps);
   return (
-    <View style={styles.container}>
+    <View style={containerStyle}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         {...textInputProps}
@@ -29,9 +37,6 @@ export default function CustomTextInput({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    gap: 2,
-  },
   input: {
     borderWidth: 1,
     borderColor: "gainsboro",
