@@ -9,9 +9,9 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const PaymentInfoSchema = z.object({
-  cardNumber: z.string(),
-  expiryDate: z.string(),
-  cvv: z.string(),
+  cardNumber: z.string().min(1, { message: "Card number is required!" }),
+  expiryDate: z.string().min(1, { message: "Expiry date is required!" }),
+  cvv: z.string().min(1, { message: "CVV is required!" }),
 });
 
 type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
