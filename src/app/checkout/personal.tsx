@@ -11,6 +11,10 @@ import {
   FormProvider,
 } from "react-hook-form";
 
+
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 export default function PersonalDetailsFormScreen() {
   const onNext: SubmitHandler<any> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
