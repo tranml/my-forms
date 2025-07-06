@@ -4,7 +4,12 @@ import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
-import { useForm, SubmitHandler, Controller } from "react-hook-form";
+import {
+  useForm,
+  SubmitHandler,
+  // Controller,
+  FormProvider,
+} from "react-hook-form";
 
 export default function PersonalDetailsFormScreen() {
   const onNext = () => {
@@ -14,17 +19,20 @@ export default function PersonalDetailsFormScreen() {
     router.push("/checkout/payment");
   };
 
-  const {
-    handleSubmit,
-    formState: { errors },
-    control,
-  } = useForm();
+  // const {
+  //   handleSubmit,
+  //   formState: { errors },
+  //   control,
+  // } = useForm();
 
-  console.log("errors", errors);
+  const form = useForm();
+
+  console.log("errors", form.formState.errors);
 
   return (
     <KeyboardAwareScrollView>
-      <Controller
+      <FormProvider {...form}>
+        {/* <Controller
         control={control}
         name="fullName"
         rules={{ required: "Full Name is required" }}
@@ -37,37 +45,40 @@ export default function PersonalDetailsFormScreen() {
             value={value}
           />
         )}
-      />
+      /> */}
 
-      <CustomTextInput
-        label="Address"
-        placeholder="123 Main St, Anytown, USA"
-      />
-      <View style={{ flexDirection: "row", gap: 8 }}>
+        <CustomTextInput label="Full Name" placeholder="John Doe" />
+
         <CustomTextInput
-          label="City"
-          placeholder="Anytown"
-          containerStyle={{ flex: 1 }}
+          label="Address"
+          placeholder="123 Main St, Anytown, USA"
         />
+        <View style={{ flexDirection: "row", gap: 8 }}>
+          <CustomTextInput
+            label="City"
+            placeholder="Anytown"
+            containerStyle={{ flex: 1 }}
+          />
+          <CustomTextInput
+            label="Postal Code"
+            placeholder="12345"
+            inputMode="numeric"
+            containerStyle={{ flex: 1 }}
+          />
+        </View>
+
         <CustomTextInput
-          label="Postal Code"
-          placeholder="12345"
-          inputMode="numeric"
-          containerStyle={{ flex: 1 }}
+          label="Phone Number"
+          placeholder="1234567890"
+          inputMode="tel"
         />
-      </View>
 
-      <CustomTextInput
-        label="Phone Number"
-        placeholder="1234567890"
-        inputMode="tel"
-      />
-
-      <CustomButton
-        title="Next"
-        onPress={handleSubmit(onNext)}
-        style={styles.button}
-      />
+        <CustomButton
+          title="Next"
+          onPress={form.handleSubmit(onNext)}
+          style={styles.button}
+        />
+      </FormProvider>
     </KeyboardAwareScrollView>
   );
 }
