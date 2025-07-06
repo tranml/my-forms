@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
@@ -43,6 +43,23 @@ export default function PaymentDetailsFormScreen() {
           inputMode="numeric"
           placeholder="1234 5678 9012 3456"
         />
+
+        <View style={styles.row}>
+          <CustomTextInput 
+            label="Expiry Date" 
+            name="expiryDate"
+            inputMode="numeric"
+            placeholder="12/27"
+            containerStyle={{flex: 1}}
+          />
+          <CustomTextInput 
+            label="CVV" 
+            name="cvv"
+            inputMode="numeric"
+            placeholder="123"
+            containerStyle={{flex: 1}}
+          />
+        </View>
         <CustomButton
           title="Next"
           onPress={form.handleSubmit(onNext)}
@@ -61,5 +78,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: "auto",
+  },
+  row: {
+    flexDirection: "row",
+    gap: 10,
   },
 });
