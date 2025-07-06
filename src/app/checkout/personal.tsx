@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
+import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
 export default function PersonalDetailsFormScreen() {
   const onNext = () => {
@@ -12,11 +13,8 @@ export default function PersonalDetailsFormScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <CustomTextInput
-        label="Full Name"
-        placeholder="John Doe"
-      />
+    <KeyboardAwareScrollView>
+      <CustomTextInput label="Full Name" placeholder="John Doe" />
 
       <CustomTextInput
         label="Address"
@@ -43,14 +41,14 @@ export default function PersonalDetailsFormScreen() {
       />
 
       <CustomButton title="Next" onPress={onNext} style={styles.button} />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "white",
+    flexGrow: 1,
+    // backgroundColor: "white",
     padding: 20,
     gap: 6,
   },

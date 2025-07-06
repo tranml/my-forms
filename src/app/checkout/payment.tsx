@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
 export default function PaymentDetailsFormScreen() {
   const onNext = () => {
@@ -11,10 +12,10 @@ export default function PaymentDetailsFormScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAwareScrollView>
       <Text>Payment Details</Text>
       <CustomButton title="Next" onPress={onNext} style={styles.button} />
-    </View>
+    </KeyboardAwareScrollView>
   );
 }
 
