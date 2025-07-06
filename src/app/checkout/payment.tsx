@@ -9,7 +9,7 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const PaymentInfoSchema = z.object({
-  cardNumber: z.string().min(1, { message: "Card number is required!" }),
+  cardNumber: z.string().length(16, { message: "Card number must be 16 digits" }),
   expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, {
     message: "Expiry date must be in the format MM/YY",
   }),
