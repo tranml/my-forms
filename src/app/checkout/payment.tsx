@@ -52,6 +52,7 @@ export default function PaymentDetailsFormScreen() {
             name="expiryDate"
             placeholder="12/27"
             containerStyle={{ flex: 1 }}
+            maxLength={5}
           />
           <CustomTextInput
             label="CVV"
@@ -59,6 +60,7 @@ export default function PaymentDetailsFormScreen() {
             inputMode="numeric"
             placeholder="123"
             containerStyle={{ flex: 1 }}
+            maxLength={3}
           />
         </View>
         <CustomButton
