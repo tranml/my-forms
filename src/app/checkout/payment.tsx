@@ -10,8 +10,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 const PaymentInfoSchema = z.object({
   cardNumber: z.string().min(1, { message: "Card number is required!" }),
-  expiryDate: z.string().min(1, { message: "Expiry date is required!" }),
-  cvv: z.coerce.number().min(100, { message: "CVV must be 3 digits" }).max(999, { message: "CVV must be 3 digits" }),
+  expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, {
+    message: "Expiry date must be in the format MM/YY",
+  }),
+  cvv: z.coerce
+    .number()
+    .min(100, { message: "CVV must be 3 digits" })
+    .max(999, { message: "CVV must be 3 digits" }),
 });
 
 type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
@@ -44,7 +49,6 @@ export default function PaymentDetailsFormScreen() {
           <CustomTextInput
             label="Expiry Date"
             name="expiryDate"
-            inputMode="numeric"
             placeholder="12/27"
             containerStyle={{ flex: 1 }}
           />
