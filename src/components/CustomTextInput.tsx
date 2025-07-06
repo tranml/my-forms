@@ -9,10 +9,17 @@ export default function CustomTextInput({
   label,
   ...textInputProps
 }: CustomTextInputProps) {
+    const error = { message: "This is an error" };
+//   const error = undefined;
+
   return (
     <View style={styles.container}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <TextInput {...textInputProps} style={styles.input} />
+      <TextInput
+        {...textInputProps}
+        style={[styles.input, error ? styles.errorInput : null]}
+      />
+      <Text style={styles.error}>{error?.message}</Text>
     </View>
   );
 }
@@ -20,15 +27,24 @@ export default function CustomTextInput({
 const styles = StyleSheet.create({
   container: {
     gap: 4,
+    backgroundColor: "red",
   },
   input: {
     borderWidth: 1,
     borderColor: "gainsboro",
     padding: 10,
     borderRadius: 10,
+    marginBottom: 4,
+  },
+  errorInput: {
+    borderColor: "crimson",
   },
   label: {
     fontWeight: "600",
     color: "dimgray",
+  },
+  error: {
+    color: "crimson",
+    fontSize: 12,
   },
 });
