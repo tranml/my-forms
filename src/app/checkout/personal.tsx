@@ -4,7 +4,7 @@ import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 
 export default function PersonalDetailsFormScreen() {
   const onNext = () => {
@@ -17,13 +17,27 @@ export default function PersonalDetailsFormScreen() {
   const {
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm();
 
-  console.log(errors);
+  console.log("errors", errors);
 
   return (
     <KeyboardAwareScrollView>
-      <CustomTextInput label="Full Name" placeholder="John Doe" />
+      <Controller
+        control={control}
+        name="fullName"
+        rules={{ required: true }}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <CustomTextInput
+            label="Full Name"
+            placeholder="John Doe"
+            onChangeText={onChange}
+            onBlur={onBlur}
+            value={value}
+          />
+        )}
+      />
 
       <CustomTextInput
         label="Address"
