@@ -12,9 +12,9 @@ import {
 } from "react-hook-form";
 
 export default function PersonalDetailsFormScreen() {
-  const onNext = () => {
+  const onNext: SubmitHandler<any> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
-
+    console.log("data", data);
     //navigate to next screen
     router.push("/checkout/payment");
   };
@@ -47,19 +47,26 @@ export default function PersonalDetailsFormScreen() {
         )}
       /> */}
 
-        <CustomTextInput label="Full Name" placeholder="John Doe" />
+        <CustomTextInput
+          name="fullName"
+          label="Full Name"
+          placeholder="John Doe"
+        />
 
         <CustomTextInput
+          name="address"
           label="Address"
           placeholder="123 Main St, Anytown, USA"
         />
         <View style={{ flexDirection: "row", gap: 8 }}>
           <CustomTextInput
+            name="city"
             label="City"
             placeholder="Anytown"
             containerStyle={{ flex: 1 }}
           />
           <CustomTextInput
+            name="postalCode"
             label="Postal Code"
             placeholder="12345"
             inputMode="numeric"
@@ -68,6 +75,7 @@ export default function PersonalDetailsFormScreen() {
         </View>
 
         <CustomTextInput
+          name="phoneNumber"
           label="Phone Number"
           placeholder="1234567890"
           inputMode="tel"
