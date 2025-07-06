@@ -43,6 +43,7 @@ export default function PaymentDetailsFormScreen() {
           name="cardNumber"
           inputMode="numeric"
           placeholder="1234 5678 9012 3456"
+          maxLength={16}
         />
 
         <View style={styles.row}>
