@@ -14,7 +14,12 @@ export default function PersonalDetailsFormScreen() {
     router.push("/checkout/payment");
   };
 
-  const { handleSubmit } = useForm();
+  const {
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  console.log(errors);
 
   return (
     <KeyboardAwareScrollView>
