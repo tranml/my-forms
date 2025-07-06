@@ -9,13 +9,9 @@ import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const PaymentInfoSchema = z.object({
-  cardNumber: z
-    .string()
-    .min(1, { message: "Card number is required!" })
-    .regex(/^\d{4} \d{4} \d{4} \d{4}$/, {
-      message: "Invalid card number format",
-    })
-    .max(16, { message: "Card number must be 16 digits" }),
+  cardNumber: z.string(),
+  expiryDate: z.string(),
+  cvv: z.string(),
 });
 
 type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
@@ -28,7 +24,7 @@ export default function PaymentDetailsFormScreen() {
   const onNext: SubmitHandler<PaymentInfoFormData> = (data) => {
     //validate form
 
-    console.log(data)
+    console.log(data);
 
     //navigate to next screen
     router.push("/checkout/confirm");
@@ -45,19 +41,19 @@ export default function PaymentDetailsFormScreen() {
         />
 
         <View style={styles.row}>
-          <CustomTextInput 
-            label="Expiry Date" 
+          <CustomTextInput
+            label="Expiry Date"
             name="expiryDate"
             inputMode="numeric"
             placeholder="12/27"
-            containerStyle={{flex: 1}}
+            containerStyle={{ flex: 1 }}
           />
-          <CustomTextInput 
-            label="CVV" 
+          <CustomTextInput
+            label="CVV"
             name="cvv"
             inputMode="numeric"
             placeholder="123"
-            containerStyle={{flex: 1}}
+            containerStyle={{ flex: 1 }}
           />
         </View>
         <CustomButton
