@@ -11,10 +11,26 @@ import {
   FormProvider,
 } from "react-hook-form";
 
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const PersonalInfoSchema = z.object({
+  fullName: z
+    .string({ message: "Full name is required!" })
+    .min(1, { message: "Full name must be longer than 1" })
+    .trim(),
+  address: z.string().min(1, { message: "Please provide your address!" }),
+  city: z.string().min(1, { message: "City is required!" }),
+  postcode: z.string().min(1, { message: "Postal code is required!" }),
+  phone: z.string().min(1, { message: "Phone is required!" }),
+});
+
+type PersonalInfoFormData = z.infer<typeof PersonalInfoSchema>;
+
 export default function PersonalDetailsFormScreen() {
-  const onNext: SubmitHandler<any> = (data) => {
+  const onNext: SubmitHandler<PersonalInfoFormData> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
-    console.log("data", data);
+    console.log("data", data.fullName);
     //navigate to next screen
     router.push("/checkout/payment");
   };
@@ -25,9 +41,11 @@ export default function PersonalDetailsFormScreen() {
   //   control,
   // } = useForm();
 
-  const form = useForm();
+  const form = useForm<PersonalInfoFormData>({
+    resolver: zodResolver(PersonalInfoSchema),
+  });
 
-  console.log("errors", form.formState.errors);
+  // console.log("errors", form.formState.errors);
 
   return (
     <KeyboardAwareScrollView>
@@ -66,7 +84,7 @@ export default function PersonalDetailsFormScreen() {
             containerStyle={{ flex: 1 }}
           />
           <CustomTextInput
-            name="postalCode"
+            name="postcode"
             label="Postal Code"
             placeholder="12345"
             inputMode="numeric"
@@ -75,7 +93,7 @@ export default function PersonalDetailsFormScreen() {
         </View>
 
         <CustomTextInput
-          name="phoneNumber"
+          name="phone"
           label="Phone Number"
           placeholder="1234567890"
           inputMode="tel"
