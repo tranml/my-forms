@@ -11,8 +11,15 @@ import {
   FormProvider,
 } from "react-hook-form";
 
-import { PersonalInfoSchema, PersonalInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
+import {
+  PersonalInfoSchema,
+  PersonalInfoFormData,
+  useCheckoutForm,
+} from "../../contexts/CheckoutFormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import CustomPicker from "../../components/CustomPicker";
+import countries from "../../../assets/countries.json";
 
 export default function PersonalDetailsFormScreen() {
   const { setPersonalInfo, personalInfo } = useCheckoutForm();
@@ -37,7 +44,6 @@ export default function PersonalDetailsFormScreen() {
   });
 
   // console.log("errors", form.formState.errors);
-
 
   return (
     <KeyboardAwareScrollView>
@@ -83,6 +89,19 @@ export default function PersonalDetailsFormScreen() {
             containerStyle={{ flex: 1 }}
           />
         </View>
+
+        <CustomPicker
+          name="country"
+          label="Country"
+          containerStyle={{ marginVertical: 12 }}
+          placeholder={{
+            label: "Select Country",
+          }}
+          items={countries.map((country) => ({
+            label: country.name,
+            value: country.code,
+          }))}
+        />
 
         <CustomTextInput
           name="phone"
