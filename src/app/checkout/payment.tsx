@@ -7,6 +7,7 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { PaymentInfoSchema, PaymentInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
+import CustomCheckbox from "../../components/CustomCheckbox";
 
 export default function PaymentDetailsFormScreen() {
   const { setPaymentInfo, paymentInfo } = useCheckoutForm();
@@ -54,6 +55,7 @@ export default function PaymentDetailsFormScreen() {
             maxLength={3}
           />
         </View>
+        <CustomCheckbox name="saveCard" label="Save card for future purchases" />
         <CustomButton
           title="Next"
           onPress={form.handleSubmit(onNext)}
