@@ -6,16 +6,18 @@ import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PaymentInfoSchema, PaymentInfoFormData } from "../../contexts/CheckoutFormProvider";
+import { PaymentInfoSchema, PaymentInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
 
 export default function PaymentDetailsFormScreen() {
   const form = useForm({
     resolver: zodResolver(PaymentInfoSchema),
   });
 
+  const { setPaymentInfo } = useCheckoutForm();
+
   const onNext: SubmitHandler<PaymentInfoFormData> = (data) => {
     //validate form
-
+    setPaymentInfo(data);
     console.log(data);
 
     //navigate to next screen
