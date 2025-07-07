@@ -1,20 +1,12 @@
 import { Text, StyleSheet, View } from "react-native";
 import CustomButton from "../../components/CustomButton";
-import { Link, router } from "expo-router";
+import { Link } from "expo-router";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 import { useCheckoutForm } from "../../contexts/CheckoutFormProvider";
 
 export default function ConfirmationFormScreen() {
-  const { personalInfo, paymentInfo } = useCheckoutForm();
+  const { personalInfo, paymentInfo, onSubmit } = useCheckoutForm();
 
-  const onSubmit = () => {
-    //validate form
-
-    // submit the data
-
-    // go to home screen
-    router.push("/");
-  };
 
   // console.log(Object.entries(personalInfo).map(([key, value]) => {
   //   return {

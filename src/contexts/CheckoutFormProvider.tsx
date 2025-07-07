@@ -1,5 +1,7 @@
 import { createContext, useContext, PropsWithChildren, useState } from "react";
 import * as z from "zod";
+import { router } from "expo-router";
+import { Alert } from "react-native";
 
 export const PersonalInfoSchema = z.object({
   fullName: z
@@ -34,6 +36,7 @@ type CheckoutFormContextType = {
   setPersonalInfo: (info: PersonalInfoFormData | undefined) => void;
   paymentInfo: PaymentInfoFormData | undefined;
   setPaymentInfo: (info: PaymentInfoFormData | undefined) => void;
+  onSubmit: () => void;
 };
 
 const CheckoutFormContext = createContext<CheckoutFormContextType>({
@@ -41,6 +44,7 @@ const CheckoutFormContext = createContext<CheckoutFormContextType>({
   setPersonalInfo: () => {},
   paymentInfo: undefined,
   setPaymentInfo: () => {},
+  onSubmit: () => {},
 });
 
 export function CheckoutFormProvider({ children }: PropsWithChildren) {
@@ -51,12 +55,28 @@ export function CheckoutFormProvider({ children }: PropsWithChildren) {
     PaymentInfoFormData | undefined
   >();
 
-  console.log("personalInfo", personalInfo);
-  console.log("paymentInfo", paymentInfo);
+  //   console.log("personalInfo", personalInfo);
+  //   console.log("paymentInfo", paymentInfo);
+
+  const onSubmit = () => {
+    if (!personalInfo || !paymentInfo)
+      return Alert.alert("Please fill in all fields");
+
+    setPersonalInfo(undefined);
+    setPaymentInfo(undefined);
+
+    router.push("/");
+  };
 
   return (
     <CheckoutFormContext.Provider
-      value={{ personalInfo, setPersonalInfo, paymentInfo, setPaymentInfo }}
+      value={{
+        personalInfo,
+        setPersonalInfo,
+        paymentInfo,
+        setPaymentInfo,
+        onSubmit,
+      }}
     >
       {children}
     </CheckoutFormContext.Provider>
