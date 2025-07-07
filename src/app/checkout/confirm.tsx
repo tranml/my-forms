@@ -29,7 +29,7 @@ export default function ConfirmationFormScreen() {
             </View>
             {Object.entries(personalInfo).map(([key, value]) => (
               <Text key={key}>
-                {key}: {value}
+                {key}: {value.toString()}
               </Text>
             ))}
           </View>
