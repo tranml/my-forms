@@ -50,6 +50,10 @@ export function CheckoutFormProvider({ children }: PropsWithChildren) {
   const [paymentInfo, setPaymentInfo] = useState<
     PaymentInfoFormData | undefined
   >();
+
+  console.log("personalInfo", personalInfo);
+  console.log("paymentInfo", paymentInfo);
+
   return (
     <CheckoutFormContext.Provider
       value={{ personalInfo, setPersonalInfo, paymentInfo, setPaymentInfo }}
