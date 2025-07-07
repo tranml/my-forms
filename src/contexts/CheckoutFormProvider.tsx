@@ -55,17 +55,14 @@ export function CheckoutFormProvider({ children }: PropsWithChildren) {
     PaymentInfoFormData | undefined
   >();
 
-  //   console.log("personalInfo", personalInfo);
-  //   console.log("paymentInfo", paymentInfo);
-
   const onSubmit = () => {
     if (!personalInfo || !paymentInfo)
       return Alert.alert("Please fill in all fields");
 
     setPersonalInfo(undefined);
     setPaymentInfo(undefined);
-
-    router.push("/");
+    router.dismissAll()
+    router.back();
   };
 
   return (
