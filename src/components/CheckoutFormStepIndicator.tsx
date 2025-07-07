@@ -17,11 +17,26 @@ const steps = [
 ];
 
 export default function CheckoutFormStepIndicator() {
+  const stepIndex = 0
+
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
-      {steps.map((step) => (
-        <View key={step.key} style={styles.stepContainer}>
-          <Text style={styles.stepTitle}>{step.title}</Text>
+      {steps.map((step, index) => (
+        <View
+          key={step.key}
+          style={[
+            styles.stepContainer,
+            { borderBottomColor: stepIndex >= index ? "#005055" : "lightgray" },
+          ]}
+        >
+          <Text
+            style={[
+              styles.stepTitle,
+              { color: stepIndex >= index ? "#005055" : "gray" },
+            ]}
+          >
+            {step.title}
+          </Text>
         </View>
       ))}
     </SafeAreaView>
@@ -33,7 +48,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 10,
-    backgroundColor: "lightblue",
     height: 110,
     gap: 16,
   },
