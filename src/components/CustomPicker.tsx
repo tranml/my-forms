@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, StyleProp, ViewStyle } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
 import { useController } from "react-hook-form";
@@ -7,11 +7,13 @@ import { useController } from "react-hook-form";
 type CustomPickerProps = {
   name: string;
   label?: string;
+  containerStyle?: StyleProp<ViewStyle>;
 } & Omit<ComponentProps<typeof RNPickerSelect>, "onValueChange">;
 
 export default function CustomPicker({
   name,
   label,
+  containerStyle,
   ...pickerProps
 }: CustomPickerProps) {
   const {
@@ -19,7 +21,7 @@ export default function CustomPicker({
     fieldState: { error },
   } = useController({ name });
   return (
-    <View>
+    <View style={containerStyle}>
       {label && <Text style={styles.label}>{label}</Text>}
       <RNPickerSelect
         {...pickerProps}
