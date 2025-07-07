@@ -11,26 +11,16 @@ import {
   FormProvider,
 } from "react-hook-form";
 
-import * as z from "zod";
+import { PersonalInfoSchema, PersonalInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const PersonalInfoSchema = z.object({
-  fullName: z
-    .string({ message: "Full name is required!" })
-    .min(1, { message: "Full name must be longer than 1" })
-    .trim(),
-  address: z.string().min(1, { message: "Please provide your address!" }),
-  city: z.string().min(1, { message: "City is required!" }),
-  postcode: z.string().min(1, { message: "Postal code is required!" }),
-  phone: z.string().min(1, { message: "Phone is required!" }),
-});
-
-type PersonalInfoFormData = z.infer<typeof PersonalInfoSchema>;
-
 export default function PersonalDetailsFormScreen() {
+  const { setPersonalInfo, personalInfo } = useCheckoutForm();
+
   const onNext: SubmitHandler<PersonalInfoFormData> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
     console.log("data", data.fullName);
+    setPersonalInfo(data);
     //navigate to next screen
     router.push("/checkout/payment");
   };
@@ -43,9 +33,11 @@ export default function PersonalDetailsFormScreen() {
 
   const form = useForm<PersonalInfoFormData>({
     resolver: zodResolver(PersonalInfoSchema),
+    defaultValues: personalInfo,
   });
 
   // console.log("errors", form.formState.errors);
+
 
   return (
     <KeyboardAwareScrollView>
