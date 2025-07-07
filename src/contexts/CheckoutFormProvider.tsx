@@ -13,6 +13,7 @@ export const PersonalInfoSchema = z.object({
   postcode: z.string().min(1, { message: "Postal code is required!" }),
   country: z.string().length(2, { message: "Country is required!" }),
   phone: z.string().min(1, { message: "Phone is required!" }),
+  birthday: z.date({ message: "Birthday is required!" }),
 });
 
 export type PersonalInfoFormData = z.infer<typeof PersonalInfoSchema>;
