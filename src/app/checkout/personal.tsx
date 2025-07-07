@@ -15,6 +15,8 @@ import { PersonalInfoSchema, PersonalInfoFormData, useCheckoutForm } from "../..
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function PersonalDetailsFormScreen() {
+  const { setPersonalInfo, personalInfo } = useCheckoutForm();
+
   const onNext: SubmitHandler<PersonalInfoFormData> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
     console.log("data", data.fullName);
@@ -31,11 +33,11 @@ export default function PersonalDetailsFormScreen() {
 
   const form = useForm<PersonalInfoFormData>({
     resolver: zodResolver(PersonalInfoSchema),
+    defaultValues: personalInfo,
   });
 
   // console.log("errors", form.formState.errors);
 
-  const { setPersonalInfo } = useCheckoutForm();
 
   return (
     <KeyboardAwareScrollView>

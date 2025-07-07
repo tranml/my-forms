@@ -9,11 +9,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { PaymentInfoSchema, PaymentInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
 
 export default function PaymentDetailsFormScreen() {
+  const { setPaymentInfo, paymentInfo } = useCheckoutForm();
+
   const form = useForm({
     resolver: zodResolver(PaymentInfoSchema),
+    defaultValues: paymentInfo,
   });
 
-  const { setPaymentInfo } = useCheckoutForm();
 
   const onNext: SubmitHandler<PaymentInfoFormData> = (data) => {
     //validate form
