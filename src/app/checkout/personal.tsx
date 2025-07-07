@@ -111,7 +111,7 @@ export default function PersonalDetailsFormScreen() {
           inputMode="tel"
         />
 
-        <CustomDateTimePicker name="date" />
+        <CustomDateTimePicker name="birthday" />
 
         <CustomButton
           title="Next"

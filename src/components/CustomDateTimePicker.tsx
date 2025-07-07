@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useController } from 'react-hook-form';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 type CustomDateTimePicker = {
@@ -51,9 +51,17 @@ export default function CustomDateTimePicker({ name }: CustomDateTimePicker) {
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
       />
-      <Text style={{ color: 'crimson' }} numberOfLines={1}>
+      <Text style={styles.error} numberOfLines={1}>
         {error?.message}
       </Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  error: {
+    color: "crimson",
+    fontSize: 8,
+    height: 17,
+  },
+});
