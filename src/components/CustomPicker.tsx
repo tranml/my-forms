@@ -1,5 +1,5 @@
 import { ComponentProps } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
 import { useController } from "react-hook-form";
@@ -14,22 +14,30 @@ export default function CustomPicker({
 }: CustomPickerProps) {
   const {
     field: { value, onBlur, onChange },
+    fieldState: { error },
   } = useController({ name });
   return (
-    <RNPickerSelect
-      {...pickerProps}
-      value={value}
-      onValueChange={(value) => onChange(value)}
-      onClose={onBlur}
-      style={{
-        viewContainer: {
-          ...styles.container,
-        },
-        inputIOS: {
-          ...styles.inputIOS,
-        },
-      }}
-    />
+    <View>
+      <RNPickerSelect
+        {...pickerProps}
+        value={value}
+        onValueChange={(value) => onChange(value)}
+        onClose={onBlur}
+        style={{
+          viewContainer: {
+            ...styles.container,
+          },
+          inputIOS: {
+            ...styles.inputIOS,
+            ...(error && styles.errorInput),
+          },
+        }}
+      />
+
+      <Text style={styles.error} numberOfLines={1}>
+        {error?.message}
+      </Text>
+    </View>
   );
 }
 
@@ -45,5 +53,13 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     pointerEvents: "none",
+  },
+  errorInput: {
+    borderColor: "crimson",
+  },
+  error: {
+    color: "crimson",
+    fontSize: 8,
+    height: 17,
   },
 });
