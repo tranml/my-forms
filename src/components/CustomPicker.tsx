@@ -2,15 +2,25 @@ import { ComponentProps } from "react";
 import { StyleSheet } from "react-native";
 import RNPickerSelect from "react-native-picker-select";
 
+import { useController } from "react-hook-form";
+
 type CustomPickerProps = {
   name: string;
 } & Omit<ComponentProps<typeof RNPickerSelect>, "onValueChange">;
 
-export default function CustomPicker({ ...pickerProps}: CustomPickerProps) {
+export default function CustomPicker({
+  name,
+  ...pickerProps
+}: CustomPickerProps) {
+  const {
+    field: { value, onBlur, onChange },
+  } = useController({ name });
   return (
     <RNPickerSelect
       {...pickerProps}
-      onValueChange={(value) => console.log(value)}
+      value={value}
+      onValueChange={(value) => onChange(value)}
+      onClose={onBlur}
       style={{
         viewContainer: {
           ...styles.container,
