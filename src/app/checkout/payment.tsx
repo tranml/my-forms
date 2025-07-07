@@ -6,8 +6,13 @@ import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 import CustomTextInput from "../../components/CustomTextInput";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PaymentInfoSchema, PaymentInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
+import {
+  PaymentInfoSchema,
+  PaymentInfoFormData,
+  useCheckoutForm,
+} from "../../contexts/CheckoutFormProvider";
 import CustomCheckbox from "../../components/CustomCheckbox";
+import CustomSwitch from "../../components/CustomSwitch";
 
 export default function PaymentDetailsFormScreen() {
   const { setPaymentInfo, paymentInfo } = useCheckoutForm();
@@ -16,7 +21,6 @@ export default function PaymentDetailsFormScreen() {
     resolver: zodResolver(PaymentInfoSchema),
     defaultValues: paymentInfo,
   });
-
 
   const onNext: SubmitHandler<PaymentInfoFormData> = (data) => {
     //validate form
@@ -55,7 +59,13 @@ export default function PaymentDetailsFormScreen() {
             maxLength={3}
           />
         </View>
-        <CustomCheckbox name="saveCard" label="Save card for future purchases" />
+        <CustomCheckbox
+          name="saveCard"
+          label="Save card for future purchases"
+        />
+
+        <CustomSwitch name="switchValue" label="Switch Value" />
+
         <CustomButton
           title="Next"
           onPress={form.handleSubmit(onNext)}
