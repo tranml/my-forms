@@ -4,6 +4,8 @@ import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
+import RNPickerSelect from "react-native-picker-select";
+
 import {
   useForm,
   SubmitHandler,
@@ -11,8 +13,14 @@ import {
   FormProvider,
 } from "react-hook-form";
 
-import { PersonalInfoSchema, PersonalInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
+import {
+  PersonalInfoSchema,
+  PersonalInfoFormData,
+  useCheckoutForm,
+} from "../../contexts/CheckoutFormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import countries from "../../../assets/countries.json";
 
 export default function PersonalDetailsFormScreen() {
   const { setPersonalInfo, personalInfo } = useCheckoutForm();
@@ -37,7 +45,6 @@ export default function PersonalDetailsFormScreen() {
   });
 
   // console.log("errors", form.formState.errors);
-
 
   return (
     <KeyboardAwareScrollView>
@@ -83,6 +90,31 @@ export default function PersonalDetailsFormScreen() {
             containerStyle={{ flex: 1 }}
           />
         </View>
+
+        <RNPickerSelect
+          onValueChange={(value) => console.log(value)}
+          placeholder={{
+            label: "Select Country",
+          }}
+          items={countries.map((country) => ({
+            label: country.name,
+            value: country.code,
+          }))}
+          style={{
+            viewContainer: {
+              marginTop: 4,
+              marginBottom: 4,
+            },
+            inputIOS: {
+              borderColor: "gainsboro",
+              borderWidth: 1,
+              width: "100%",
+              padding: 10,
+              borderRadius: 5,
+              pointerEvents: "none",
+            },
+          }}
+        />
 
         <CustomTextInput
           name="phone"
