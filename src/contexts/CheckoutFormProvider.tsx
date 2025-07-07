@@ -28,6 +28,7 @@ export const PaymentInfoSchema = z.object({
     .number()
     .min(100, { message: "CVV must be 3 digits" })
     .max(999, { message: "CVV must be 3 digits" }),
+  saveCard: z.boolean().optional(),
 });
 
 export type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
