@@ -64,7 +64,7 @@ export default function PaymentDetailsFormScreen() {
           label="Save card for future purchases"
         />
 
-        <CustomSwitch name="switchValue" label="Switch Value" />
+        <CustomSwitch name="switchValue" label="On/Off" />
 
         <CustomButton
           title="Next"
