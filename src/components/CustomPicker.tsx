@@ -6,10 +6,12 @@ import { useController } from "react-hook-form";
 
 type CustomPickerProps = {
   name: string;
+  label?: string;
 } & Omit<ComponentProps<typeof RNPickerSelect>, "onValueChange">;
 
 export default function CustomPicker({
   name,
+  label,
   ...pickerProps
 }: CustomPickerProps) {
   const {
@@ -18,6 +20,7 @@ export default function CustomPicker({
   } = useController({ name });
   return (
     <View>
+      {label && <Text style={styles.label}>{label}</Text>}
       <RNPickerSelect
         {...pickerProps}
         value={value}
@@ -61,5 +64,9 @@ const styles = StyleSheet.create({
     color: "crimson",
     fontSize: 8,
     height: 17,
+  },
+  label: {
+    fontWeight: "600",
+    color: "dimgray",
   },
 });

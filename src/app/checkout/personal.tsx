@@ -92,6 +92,7 @@ export default function PersonalDetailsFormScreen() {
 
         <CustomPicker
           name="country"
+          label="Country"
           placeholder={{
             label: "Select Country",
           }}
