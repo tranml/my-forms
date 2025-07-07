@@ -20,6 +20,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import CustomPicker from "../../components/CustomPicker";
 import countries from "../../../assets/countries.json";
+import CustomDateTimePicker from "../../components/CustomDateTimePicker";
 
 export default function PersonalDetailsFormScreen() {
   const { setPersonalInfo, personalInfo } = useCheckoutForm();
@@ -109,6 +110,8 @@ export default function PersonalDetailsFormScreen() {
           placeholder="1234567890"
           inputMode="tel"
         />
+
+        <CustomDateTimePicker name="date" />
 
         <CustomButton
           title="Next"
