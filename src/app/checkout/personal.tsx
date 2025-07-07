@@ -11,13 +11,14 @@ import {
   FormProvider,
 } from "react-hook-form";
 
-import { PersonalInfoSchema, PersonalInfoFormData } from "../../contexts/CheckoutFormProvider";
+import { PersonalInfoSchema, PersonalInfoFormData, useCheckoutForm } from "../../contexts/CheckoutFormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function PersonalDetailsFormScreen() {
   const onNext: SubmitHandler<PersonalInfoFormData> = (data) => {
     //validate form: when get to the point, data is already validated by react-hook-form
     console.log("data", data.fullName);
+    setPersonalInfo(data);
     //navigate to next screen
     router.push("/checkout/payment");
   };
@@ -33,6 +34,8 @@ export default function PersonalDetailsFormScreen() {
   });
 
   // console.log("errors", form.formState.errors);
+
+  const { setPersonalInfo } = useCheckoutForm();
 
   return (
     <KeyboardAwareScrollView>
