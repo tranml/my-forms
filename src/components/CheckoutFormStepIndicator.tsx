@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useSegments } from "expo-router";
 
 const steps = [
   {
@@ -17,7 +18,9 @@ const steps = [
 ];
 
 export default function CheckoutFormStepIndicator() {
-  const stepIndex = 0
+  const segments = useSegments();
+  const currentScreen = segments[segments.length - 1];
+  const stepIndex = steps.findIndex((step) => step.key === currentScreen)
 
   return (
     <SafeAreaView edges={["top"]} style={styles.container}>
