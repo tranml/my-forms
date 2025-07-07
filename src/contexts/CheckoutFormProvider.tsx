@@ -14,6 +14,18 @@ export const PersonalInfoSchema = z.object({
 
 export type PersonalInfoFormData = z.infer<typeof PersonalInfoSchema>;
 
+export const PaymentInfoSchema = z.object({
+  cardNumber: z.string().length(16, { message: "Card number must be 16 digits" }),
+  expiryDate: z.string().regex(/^(0[1-9]|1[0-2])\/\d{2}$/, {
+    message: "Expiry date must be in the format MM/YY",
+  }),
+  cvv: z.coerce
+    .number()
+    .min(100, { message: "CVV must be 3 digits" })
+    .max(999, { message: "CVV must be 3 digits" }),
+});
+
+export type PaymentInfoFormData = z.infer<typeof PaymentInfoSchema>;
 
 type CheckoutFormContextType = {};
 
