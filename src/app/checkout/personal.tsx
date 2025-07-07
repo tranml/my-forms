@@ -4,7 +4,6 @@ import { router } from "expo-router";
 import CustomTextInput from "../../components/CustomTextInput";
 import KeyboardAwareScrollView from "../../components/KeyboardAwareScrollView";
 
-
 import {
   useForm,
   SubmitHandler,
@@ -19,6 +18,8 @@ import {
 } from "../../contexts/CheckoutFormProvider";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import CustomPicker from "../../components/CustomPicker";
+import countries from "../../../assets/countries.json";
 
 export default function PersonalDetailsFormScreen() {
   const { setPersonalInfo, personalInfo } = useCheckoutForm();
@@ -89,6 +90,16 @@ export default function PersonalDetailsFormScreen() {
           />
         </View>
 
+        <CustomPicker
+          name="country"
+          placeholder={{
+            label: "Select Country",
+          }}
+          items={countries.map((country) => ({
+            label: country.name,
+            value: country.code,
+          }))}
+        />
 
         <CustomTextInput
           name="phone"

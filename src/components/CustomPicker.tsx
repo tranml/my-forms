@@ -4,12 +4,13 @@ import RNPickerSelect from "react-native-picker-select";
 
 type CustomPickerProps = {
   name: string;
-} & ComponentProps<typeof RNPickerSelect>;
+} & Omit<ComponentProps<typeof RNPickerSelect>, "onValueChange">;
 
 export default function CustomPicker({ ...pickerProps}: CustomPickerProps) {
   return (
     <RNPickerSelect
       {...pickerProps}
+      onValueChange={(value) => console.log(value)}
       style={{
         viewContainer: {
           ...styles.container,
